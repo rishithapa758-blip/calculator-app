@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sarmistha Calculates</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #121212;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: 95%;
+      max-width: 320px;
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 15px;
+      box-sizing: border-box;
+    }
+
+    .title {
+      color: #00d4aa;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: Georgia, serif;
+    }
+
+    #display {
+      width: 100%;
+      height: 60px;
+      font-size: 24px;
+      text-align: right;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      background: #0d0d0d;
+      color: #00d4aa;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      height: 55px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #2a2a2a;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .operator {
+      background: #00a884;
+    }
+
+    .equal {
+      background: #4caf50;
+    }
+
+    .clear {
+      background: #e53935;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="calculator">
+
+    <div class="title">Sarmistha Calculates</div>
+
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+      <button onclick="addNumber(7)">7</button>
+      <button onclick="addNumber(8)">8</button>
+      <button onclick="addNumber(9)">9</button>
+      <button class="operator" onclick="setOperator('/')">/</button>
+
+      <button onclick="addNumber(4)">4</button>
+      <button onclick="addNumber(5)">5</button>
+      <button onclick="addNumber(6)">6</button>
+      <button class="operator" onclick="setOperator('*')">*</button>
+
+      <button onclick="addNumber(1)">1</button>
+      <button onclick="addNumber(2)">2</button>
+      <button onclick="addNumber(3)">3</button>
+      <button class="operator" onclick="setOperator('-')">-</button>
+
+      <button onclick="addNumber(0)">0</button>
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="equal" onclick="calculate()">=</button>
+      <button class="operator" onclick="setOperator('+')">+</button>
+    </div>
+
+  </div>
+
+  <script>
+    let firstNumber = "";
+    let operator = "";
+
+    function addNumber(num) {
+      document.getElementById("display").value += num;
+    }
+
+    function setOperator(op) {
+      firstNumber = document.getElementById("display").value;
+      operator = op;
+      document.getElementById("display").value = "";
+    }
+
+    function calculate() {
+      let secondNumber = document.getElementById("display").value;
+      let result;
+
+      if (operator === "+") {
+        result = Number(firstNumber) + Number(secondNumber);
+      } else if (operator === "-") {
+        result = Number(firstNumber) - Number(secondNumber);
+      } else if (operator === "*") {
+        result = Number(firstNumber) * Number(secondNumber);
+      } else if (operator === "/") {
+        result = Number(firstNumber) / Number(secondNumber);
+      }
+
+      document.getElementById("display").value = result;
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = "";
+      firstNumber = "";
+      operator = "";
+    }
+  </script>
+
+</body>
+</html>
